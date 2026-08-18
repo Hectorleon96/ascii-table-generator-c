@@ -1,0 +1,12 @@
+# Compiled binaries
+*.out
+*.o
+
+# Debug / temporary files
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
