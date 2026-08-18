@@ -14,7 +14,7 @@ typedef struct
 int main()
 {
 
-  char *headers[] = {"name", "age"};
+  char *headers[] = {"name", "points"};
 
   Data data[DATA_LENGTH] = {
       {"Hector", 27782},
@@ -45,7 +45,7 @@ int main()
   int pointsMaxLength = snprintf(maxPointsBuffer, sizeof(maxPointsBuffer), "%d", pointsIterator);
 
   printf("Name max length: %d\n", namesMaxLength);
-  printf("Points age length: %d\n", pointsMaxLength);
+  printf("Points max length: %d\n", pointsMaxLength);
 
   return 0;
 }
