@@ -41,24 +41,60 @@ int main()
   }
 
   int namesMaxLength = strlen(namesIterator);
+
+  if (strlen(headers[0]) > namesMaxLength)
+  {
+    namesMaxLength = strlen(headers[0]);
+  }
+
   char maxPointsBuffer[POINTS_MAX_LENGTH];
   int pointsMaxLength = snprintf(maxPointsBuffer, sizeof(maxPointsBuffer), "%d", pointsIterator);
 
-  printf("Name max length: %d\n", namesMaxLength);
-  printf("Points max length: %d\n", pointsMaxLength);
+  if (strlen(headers[1]) > pointsMaxLength)
+  {
+    pointsMaxLength = strlen(headers[1]);
+  }
+
+  int spacesBetweenData = 7;
+  int horizontalTableLength = (namesMaxLength + pointsMaxLength) + spacesBetweenData;
+
+  int linesBetweenData = 4;
+  int totalTableLength = horizontalTableLength * (dataLength + linesBetweenData);
+
+  char linesBuffer[horizontalTableLength + 1];
+  linesBuffer[0] = '\0';
+
+  // name concatenation
+  strcat(linesBuffer, "+-");
+
+  for (int i = 0; i < namesMaxLength; i++)
+  {
+    strcat(linesBuffer, "-");
+  }
+
+  strcat(linesBuffer, "-");
+
+  // points concatenation
+  strcat(linesBuffer, "+-");
+
+  for (int i = 0; i < pointsMaxLength; i++)
+  {
+    strcat(linesBuffer, "-");
+  }
+
+  strcat(linesBuffer, "-+");
+
+  printf("%s\n", linesBuffer);
 
   return 0;
 }
 
 /*
-
-Output reference:
-
-+----------+-----+-------+
-| Name     | Age | Score |
-+----------+-----+-------+
-| Shurumbe | 30  | 100   |
-| Pedro    | 25  | 85    |
-| Juan     | 28  | 92    |
-+----------+-----+-------+
++----------+--------+
+| name     | points |
++----------+--------+
+| Hector   | 27782  |
+| Shurumbe | 30     |
+| Adrian   | 1299   |
++----------+--------+
 */
