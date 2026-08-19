@@ -11,6 +11,26 @@ typedef struct
   int points;
 } Data;
 
+void appendLine(char *buffer, int iterator1, int iterator2)
+{
+  strcat(buffer, "+-");
+
+  for (int i = 0; i < iterator1; i++)
+  {
+    strcat(buffer, "-");
+  }
+
+  strcat(buffer, "-");
+  strcat(buffer, "+-");
+
+  for (int i = 0; i < iterator2; i++)
+  {
+    strcat(buffer, "-");
+  }
+
+  strcat(buffer, "-+\n");
+}
+
 int main()
 {
 
@@ -64,27 +84,12 @@ int main()
   char linesBuffer[totalTableLength + 1];
   linesBuffer[0] = '\0';
 
-  // name concatenation
-  strcat(linesBuffer, "+-");
+  char tableBuffer[horizontalTableLength + 1];
+  tableBuffer[0] = '\0';
 
-  for (int i = 0; i < namesMaxLength; i++)
-  {
-    strcat(linesBuffer, "-");
-  }
+  appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
 
-  strcat(linesBuffer, "-");
-
-  // points concatenation
-  strcat(linesBuffer, "+-");
-
-  for (int i = 0; i < pointsMaxLength; i++)
-  {
-    strcat(linesBuffer, "-");
-  }
-
-  strcat(linesBuffer, "-+\n");
-
-  // header line concatenation
+  printf("%s\n", tableBuffer);
 
   return 0;
 }
