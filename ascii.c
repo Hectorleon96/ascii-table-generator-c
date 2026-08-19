@@ -61,7 +61,7 @@ int main()
   int linesBetweenData = 4;
   int totalTableLength = horizontalTableLength * (dataLength + linesBetweenData);
 
-  char linesBuffer[horizontalTableLength + 1];
+  char linesBuffer[totalTableLength + 1];
   linesBuffer[0] = '\0';
 
   // name concatenation
@@ -82,9 +82,9 @@ int main()
     strcat(linesBuffer, "-");
   }
 
-  strcat(linesBuffer, "-+");
+  strcat(linesBuffer, "-+\n");
 
-  printf("%s\n", linesBuffer);
+  // header line concatenation
 
   return 0;
 }
