@@ -75,19 +75,46 @@ int main()
     pointsMaxLength = strlen(headers[1]);
   }
 
-  int spacesBetweenData = 7;
-  int horizontalTableLength = (namesMaxLength + pointsMaxLength) + spacesBetweenData;
+  const int SPACES_BETWEEN_DATA = 7;
+  int horizontalTableLength = (namesMaxLength + pointsMaxLength) + SPACES_BETWEEN_DATA;
 
-  int linesBetweenData = 4;
-  int totalTableLength = horizontalTableLength * (dataLength + linesBetweenData);
+  const int LINES_BETWEEN_DATA = 4;
+  const int NULL_TERMINATOR_SIZE = 1;
+  int totalTableLength = (horizontalTableLength * (dataLength + LINES_BETWEEN_DATA)) + NULL_TERMINATOR_SIZE;
 
-  char linesBuffer[totalTableLength + 1];
-  linesBuffer[0] = '\0';
+  char tableBuffer[totalTableLength];
 
-  char tableBuffer[horizontalTableLength + 1];
   tableBuffer[0] = '\0';
 
+  // top table
+
   appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
+
+  // append headers
+
+  strcat(tableBuffer, "| ");
+  strcat(tableBuffer, headers[0]);
+
+  for (int i = 0; i < (namesMaxLength - strlen(headers[0])); i++)
+  {
+    strcat(tableBuffer, " ");
+  }
+
+  strcat(tableBuffer, " ");
+  strcat(tableBuffer, "| ");
+  strcat(tableBuffer, headers[1]);
+
+  for (int i = 0; i < (pointsMaxLength - strlen(headers[1])); i++)
+  {
+    strcat(tableBuffer, " ");
+  }
+
+  strcat(tableBuffer, " ");
+  strcat(tableBuffer, "| \n");
+
+  appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
+
+  // append data
 
   printf("%s\n", tableBuffer);
 
