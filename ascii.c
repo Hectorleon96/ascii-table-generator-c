@@ -37,9 +37,9 @@ int main()
   char *headers[] = {"name", "points"};
 
   Data data[DATA_LENGTH] = {
-      {"Hector", 27782},
+      {"Briones", 27782},
       {"Shurumbe", 30},
-      {"Adrian", 1299},
+      {"Bertha nates", 12995732},
   };
 
   int dataLength = sizeof(data) / sizeof(data[0]);
@@ -75,17 +75,76 @@ int main()
     pointsMaxLength = strlen(headers[1]);
   }
 
-  int spacesBetweenData = 7;
-  int horizontalTableLength = (namesMaxLength + pointsMaxLength) + spacesBetweenData;
+  const int SPACES_BETWEEN_DATA = 7;
+  int horizontalTableLength = (namesMaxLength + pointsMaxLength) + SPACES_BETWEEN_DATA;
 
-  int linesBetweenData = 4;
-  int totalTableLength = horizontalTableLength * (dataLength + linesBetweenData);
+  const int LINES_BETWEEN_DATA = 4;
+  const int NULL_TERMINATOR_SIZE = 1;
+  int totalTableLength = (horizontalTableLength * (dataLength + LINES_BETWEEN_DATA)) + NULL_TERMINATOR_SIZE;
 
-  char linesBuffer[totalTableLength + 1];
-  linesBuffer[0] = '\0';
+  char tableBuffer[totalTableLength];
 
-  char tableBuffer[horizontalTableLength + 1];
   tableBuffer[0] = '\0';
+
+  // open table
+
+  appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
+
+  // append headers
+
+  strcat(tableBuffer, "| ");
+  strcat(tableBuffer, headers[0]);
+
+  for (int i = 0; i < (namesMaxLength - strlen(headers[0])); i++)
+  {
+    strcat(tableBuffer, " ");
+  }
+
+  strcat(tableBuffer, " ");
+  strcat(tableBuffer, "| ");
+  strcat(tableBuffer, headers[1]);
+
+  for (int i = 0; i < (pointsMaxLength - strlen(headers[1])); i++)
+  {
+    strcat(tableBuffer, " ");
+  }
+
+  strcat(tableBuffer, " ");
+  strcat(tableBuffer, "|\n");
+
+  // separator
+
+  appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
+
+  // append data
+
+  for (int i = 0; i < dataLength; i++)
+  {
+    strcat(tableBuffer, "| ");
+    strcat(tableBuffer, data[i].name);
+
+    for (int j = 0; j < (namesMaxLength - strlen(data[i].name)); j++)
+    {
+      strcat(tableBuffer, " ");
+    }
+
+    strcat(tableBuffer, " ");
+    strcat(tableBuffer, "| ");
+
+    char pointBuffer[pointsMaxLength + 1];
+    snprintf(pointBuffer, sizeof(pointBuffer), "%d", data[i].points);
+    strcat(tableBuffer, pointBuffer);
+
+    for (int j = 0; j < (pointsMaxLength - strlen(pointBuffer)); j++)
+    {
+      strcat(tableBuffer, " ");
+    }
+
+    strcat(tableBuffer, " ");
+    strcat(tableBuffer, "|\n");
+  }
+
+  // close table
 
   appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
 
@@ -93,13 +152,3 @@ int main()
 
   return 0;
 }
-
-/*
-+----------+--------+
-| name     | points |
-+----------+--------+
-| Hector   | 27782  |
-| Shurumbe | 30     |
-| Adrian   | 1299   |
-+----------+--------+
-*/
