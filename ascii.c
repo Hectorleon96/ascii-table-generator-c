@@ -37,9 +37,9 @@ int main()
   char *headers[] = {"name", "points"};
 
   Data data[DATA_LENGTH] = {
-      {"Briones", 27782},
-      {"Shurumbe", 30},
-      {"Bertha nates", 12995732},
+      {"Anderson", 18420},
+      {"Bennett", 7635},
+      {"Crawford", 42190},
   };
 
   int dataLength = sizeof(data) / sizeof(data[0]);
