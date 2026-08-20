@@ -37,9 +37,9 @@ int main()
   char *headers[] = {"name", "points"};
 
   Data data[DATA_LENGTH] = {
-      {"Hector", 27782},
+      {"Briones", 27782},
       {"Shurumbe", 30},
-      {"Adrian", 1299},
+      {"Bertha nates", 12995732},
   };
 
   int dataLength = sizeof(data) / sizeof(data[0]);
@@ -86,7 +86,7 @@ int main()
 
   tableBuffer[0] = '\0';
 
-  // top table
+  // open table
 
   appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
 
@@ -110,23 +110,45 @@ int main()
   }
 
   strcat(tableBuffer, " ");
-  strcat(tableBuffer, "| \n");
+  strcat(tableBuffer, "|\n");
+
+  // separator
 
   appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
 
   // append data
 
+  for (int i = 0; i < dataLength; i++)
+  {
+    strcat(tableBuffer, "| ");
+    strcat(tableBuffer, data[i].name);
+
+    for (int j = 0; j < (namesMaxLength - strlen(data[i].name)); j++)
+    {
+      strcat(tableBuffer, " ");
+    }
+
+    strcat(tableBuffer, " ");
+    strcat(tableBuffer, "| ");
+
+    char pointBuffer[pointsMaxLength + 1];
+    snprintf(pointBuffer, sizeof(pointBuffer), "%d", data[i].points);
+    strcat(tableBuffer, pointBuffer);
+
+    for (int j = 0; j < (pointsMaxLength - strlen(pointBuffer)); j++)
+    {
+      strcat(tableBuffer, " ");
+    }
+
+    strcat(tableBuffer, " ");
+    strcat(tableBuffer, "|\n");
+  }
+
+  // close table
+
+  appendLine(tableBuffer, namesMaxLength, pointsMaxLength);
+
   printf("%s\n", tableBuffer);
 
   return 0;
 }
-
-/*
-+----------+--------+
-| name     | points |
-+----------+--------+
-| Hector   | 27782  |
-| Shurumbe | 30     |
-| Adrian   | 1299   |
-+----------+--------+
-*/
