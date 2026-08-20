@@ -2,16 +2,18 @@
 
 A small ASCII table generator written in C.
 
-This project is a practice exercise to explore the C programming language by recreating a table generator I previously built with JavaScript.
+A practice project to explore C by recreating a table generator I previously built with JavaScript.
+
+**Just wanna write code. That's it.**
 
 ## Example
 
 ```text
-+----------+-----+-------+
-| Name     | Age | Score |
-+----------+-----+-------+
-| Shurumbe | 30  | 100   |
-| Pedro    | 25  | 85    |
-| Juan     | 28  | 92    |
-+----------+-----+-------+
++----------+--------+
+| name     | points |
++----------+--------+
+| Anderson | 18420  |
+| Bennett  | 7635   |
+| Crawford | 42190  |
++----------+--------+
 ```
